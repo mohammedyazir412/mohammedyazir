@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..800&family=Afacad:wght@400;500;600&family=Mrs+Saint+Delafield&display=swap"
         rel="stylesheet">
 
     <!-- Stylesheet -->
@@ -21,335 +21,298 @@
 
 <body>
 
-    <!-- 3D Canvas (fixed background) -->
-    <canvas id="three-canvas"></canvas>
+    <!-- Atmosphere: animated gradient, shadow streaks, grain, grid lines -->
+    <div class="atmos" aria-hidden="true">
+        <div class="atmos-glow g1"></div>
+        <div class="atmos-glow g2"></div>
+        <div class="atmos-glow g3"></div>
+        <div class="atmos-streak s1"></div>
+        <div class="atmos-streak s2"></div>
+        <div class="atmos-streak s3"></div>
+    </div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="grid-lines" aria-hidden="true"><span></span><span></span><span></span></div>
 
+    <!-- ═══════════════ NAV ═══════════════ -->
+    <header id="main-nav">
+        <div class="nav-brand">
+            <a href="#hero" class="logo"><span class="hl">mo</span>yazir<small>Developer</small></a>
+        </div>
+        <nav class="nav-links">
+            <a href="#about">About</a><i>/</i>
+            <a href="#experience">Work</a><i>/</i>
+            <a href="#skills">Skills</a><i>/</i>
+            <a href="#portfolio">Projects</a>
+        </nav>
+        <a href="#contact" class="nav-cta">Let's Talk</a>
+    </header>
 
     <!-- ═══════════════ HERO ═══════════════ -->
     <section id="hero">
-        <div class="hero-content">
-            <p class="hero-eyebrow">Web Developer</p>
-            <h1 class="hero-title interactive-name">
-                <span class="name-line">
-                    <span class="char-wrap boxed" data-char="M">M</span>
-                    <span class="char">O</span><span class="char">H</span><span class="char">A</span><span
-                        class="char">M</span><span class="char">M</span><span class="char">E</span><span
-                        class="char">D</span>
-                </span>
-                <span class="name-line">
-                    <span class="char">Y</span><span class="char">A</span><span class="char">Z</span><span
-                        class="char">I</span><span class="char-wrap accent" data-char="R">R</span>
+        <div class="hero-frame">
+            <span class="corner tl"></span><span class="corner tr"></span>
+            <span class="corner bl"></span><span class="corner br"></span>
 
-                    <span class="char-wrap s-box" data-char="S">S
+            <p class="eyebrow">Based in <b>Madurai, India</b> · Building since 2024</p>
 
-                    </span>
-                </span>
+            <h1 class="wordmark">
+                <span class="hl">mo</span>yazir<sup>S.</sup>
+                <span class="wordmark-sub">Full Stack</span>
             </h1>
-            <p class="hero-tagline">Engineering Secure, Scalable, and High-Performance FinTech & Blockchain Ecosystems
-            </p>
-            <div class="hero-cta-row">
-                <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                <a href="#experience" class="btn btn-outline">View Work</a>
-            </div>
-        </div>
-        <!-- <div class="scroll-indicator">
-            <div class="scroll-line"></div>
-            <span>DISCOVER</span>
-        </div> -->
-    </section>
 
-    <!-- ═══════════════ ABOUT ═══════════════ -->
-    <section id="about">
-        <div class="container split-layout">
-            <div class="about-text">
-                <span class="section-label">01 — About</span>
-                <h2 class="section-heading">Foundations<br>&amp; <em>Focus</em></h2>
-                <p class="lead-text">I'm a Full Stack Developer focused on building secure, scalable, and
-                    high-performance digital products in <strong>Blockchain and FinTech</strong>.</p>
-                <p>With strong expertise in MERN Stack, Next.js, and TypeScript, I develop end-to-end applications that
-                    prioritize security, performance, and scalability. I focus on clean architecture, secure
-                    authentication systems, scalable backend APIs, and optimized database design (SQL &amp; NoSQL).</p>
-                <blockquote class="mission-quote">
-                    "My goal is to build secure digital systems that enhance trust, transparency, and efficiency in
-                    modern finance."
-                </blockquote>
-            </div>
-            <div class="focus-cards">
-                <div class="focus-card">
-
-                    <h4>Blockchain Platforms</h4>
-                    <p>Trading platforms and crypto exchanges</p>
-                </div>
-                <div class="focus-card">
-
-                    <h4>Casino & Gaming</h4>
-                    <p>Secure real-time transaction systems</p>
-                </div>
-                <div class="focus-card">
-
-                    <h4>Fraud Prevention</h4>
-                    <p>AI-powered FinTech detection solutions</p>
-                </div>
-
-                <div class="focus-card">
-
-                    <h4>Payment Systems</h4>
-                    <p>Secure gateways & financial dashboards</p>
-                </div>
-                <div class="focus-card">
-
-                    <h4>Business Websites</h4>
-                    <p>Static and dynamic web platforms</p>
+            <div class="hero-meta">
+                <p class="hero-tagline">Engineering secure, scalable and high-performance FinTech &amp; Blockchain
+                    ecosystems — from first commit to production.</p>
+                <div class="hero-id">
+                    <span class="avatar">MY</span>
+                    <span><b>Mohammed Yazir S</b><small>Full Stack Developer</small></span>
                 </div>
             </div>
+
+            <span class="script" aria-hidden="true">Yazir</span>
+
+            <ul class="hero-services">
+                <li>FinTech</li><li>Blockchain</li><li>Web Development</li><li>Full Stack</li>
+            </ul>
         </div>
     </section>
 
-    <!-- ═══════════════ EXPERIENCE ═══════════════ -->
-    <section id="experience">
-        <div class="container">
-            <span class="section-label">02 — Experience</span>
-            <h2 class="section-heading">Professional<br><em>Journey</em></h2>
+    <!-- ═══════════════ TICKER ═══════════════ -->
+    <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+            <span>Build <em>and</em> Ship <em>and</em> Scale <em>and</em> Secure <em>and</em></span>
+            <span>Build <em>and</em> Ship <em>and</em> Scale <em>and</em> Secure <em>and</em></span>
+        </div>
+    </div>
 
-            <div class="exp-timeline">
-                <!-- Crayon BIZ-LLP -->
-                <div class="exp-block">
-                    <div class="exp-header">
-                        <div>
-                            <h3>Crayon BIZ-LLP</h3>
-                            <span class="exp-role">Full Stack Developer</span>
-                        </div>
+    <main class="sheet">
+
+        <!-- ═══════════════ ABOUT ═══════════════ -->
+        <section id="about" class="block">
+            <div class="container">
+                <div class="block-head">
+                    <span class="label">(01) About</span>
+                    <h2 class="heading">Foundations <span class="dim">&amp; focus.</span></h2>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p class="lead">I'm a Full Stack Developer focused on building secure, scalable and
+                            high-performance digital products in <b>Blockchain and FinTech</b>.</p>
+                        <p>With strong expertise in MERN Stack, Next.js and TypeScript, I develop end-to-end
+                            applications that prioritize security, performance and scalability. I focus on clean
+                            architecture, secure authentication systems, scalable backend APIs and optimized database
+                            design (SQL &amp; NoSQL).</p>
+                        <blockquote>“My goal is to build secure digital systems that enhance trust, transparency and
+                            efficiency in modern finance.”</blockquote>
+                    </div>
+
+                    <ol class="focus-list">
+                        <li><span>01</span><h4>Blockchain Platforms</h4><p>Trading platforms and crypto exchanges</p></li>
+                        <li><span>02</span><h4>Casino &amp; Gaming</h4><p>Secure real-time transaction systems</p></li>
+                        <li><span>03</span><h4>Fraud Prevention</h4><p>AI-powered FinTech detection solutions</p></li>
+                        <li><span>04</span><h4>Payment Systems</h4><p>Secure gateways &amp; financial dashboards</p></li>
+                        <li><span>05</span><h4>Business Websites</h4><p>Landing pages to full-stack applications</p></li>
+                    </ol>
+                </div>
+
+                <div class="stats">
+                    <div class="stat"><span class="stat-num">2.5+</span><span class="stat-lbl">Years experience</span></div>
+                    <div class="stat"><span class="stat-num">15+</span><span class="stat-lbl">Projects shipped</span></div>
+                    <div class="stat"><span class="stat-num">10+</span><span class="stat-lbl">Technologies</span></div>
+                    <div class="stat"><span class="stat-num">2</span><span class="stat-lbl">Companies</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════ EXPERIENCE ═══════════════ -->
+        <section id="experience" class="block light">
+            <div class="container">
+                <div class="block-head">
+                    <span class="label">(02) Experience</span>
+                    <h2 class="heading">Professional <span class="dim">journey.</span></h2>
+                </div>
+
+                <div class="exp">
+                    <div class="exp-side">
                         <span class="exp-date">Oct 2025 — Present</span>
+                        <h3>Crayon BIZ-LLP</h3>
+                        <span class="exp-role">Full Stack Developer</span>
                     </div>
-                    <div class="project-cards-row">
-                        <div class="project-card" data-tilt>
-                            <div class="card-accent"></div>
+                    <div class="exp-cards">
+                        <article class="card">
                             <h5>ATNA.AI</h5>
-                            <p>FinTech Fraud Detection Platform — UI/UX development, API integration, and full-stack
-                                implementation for financial monitoring.</p>
-                            <div class="tech-pills">
-                                <span>React</span><span>Next.js</span><span>TypeScript</span>
-                            </div>
-                        </div>
-                        <div class="project-card" data-tilt>
-                            <div class="card-accent"></div>
-                            <h5>Cash Flow Management</h5>
-                            <p>Enterprise financial tracking system with cash flow forecasting similar to Zoho Books and
-                                QuickBooks.</p>
-                            <div class="tech-pills">
-                                <span>React</span><span>Node.js</span><span>PostgreSQL</span>
-                            </div>
-                        </div>
-                        <div class="project-card" data-tilt>
-                            <div class="card-accent"></div>
-                            <h5>Funnels</h5>
-                            <p>Control Tower centralizes prospecting, enrichment, and outreach—connecting Apollo, Clay,
-                                and Smartlead for a seamless GTM workflow.</p>
-                            <div class="tech-pills">
-                                <span>React</span><span>Next.js</span><span>Python</span><span>Node.js</span><span>TypeScript</span>
-                            </div>
-                        </div>
+                            <p class="card-sub">FinTech Fraud Detection Platform</p>
+                            <p>Full-stack financial monitoring platform focused on fraud detection, transaction
+                                monitoring and intelligent financial insights, with responsive dashboards and APIs for
+                                real-time financial data.</p>
+                            <div class="pills"><span>React.js</span><span>Next.js</span><span>TypeScript</span><span>REST APIs</span><span>Financial Data</span></div>
+                        </article>
+                        <article class="card">
+                            <h5>USA Seniors Cricket</h5>
+                            <p class="card-sub">National Premier League Platform</p>
+                            <p>Official league platform for USA Seniors Cricket — fixtures, standings, stats, teams,
+                                players and sponsors — with player, franchise and sponsor registration, secure online
+                                payments and automated confirmation and receipt emails.</p>
+                            <div class="pills"><span>Next.js</span><span>React</span><span>PHP APIs</span><span>Authorize.Net</span><span>Resend</span><span>GitHub Actions</span><span>cPanel</span></div>
+                        </article>
+                        <article class="card">
+                            <h5>Qhord Control Tower</h5>
+                            <p class="card-sub">GTM Automation &amp; Sales Intelligence</p>
+                            <p>Centralized control tower for prospecting, data enrichment and outreach, integrating
+                                Apollo, Clay and Smartlead into one GTM workflow across desktop, tablet and mobile.</p>
+                            <div class="pills"><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>Python</span><span>Integrations</span></div>
+                        </article>
+                        <article class="card">
+                            <h5>IAM Access Recertification</h5>
+                            <p class="card-sub">Enterprise Access Governance</p>
+                            <p>Aggregates identities and entitlements across cloud, database and server environments,
+                                runs access review campaigns and generates compliance-ready audit reports.</p>
+                            <div class="pills"><span>Next.js</span><span>Express</span><span>PostgreSQL</span><span>Entra ID</span><span>AWS IAM</span><span>Docker</span><span>Azure</span></div>
+                        </article>
                     </div>
                 </div>
 
-                <!-- Osiz Technologies -->
-                <div class="exp-block">
-                    <div class="exp-header">
-                        <div>
-                            <h3>Osiz Technologies</h3>
-                            <span class="exp-role">Web Developer</span>
-                        </div>
+                <div class="exp">
+                    <div class="exp-side">
                         <span class="exp-date">Jun 2024 — Sep 2025</span>
+                        <h3>Osiz Technologies</h3>
+                        <span class="exp-role">Web Developer</span>
                     </div>
-                    <div class="project-cards-row">
-                        <div class="project-card" data-tilt>
-                            <div class="card-accent"></div>
+                    <div class="exp-cards">
+                        <article class="card">
                             <h5>INOCYX</h5>
-                            <p>Global Cryptocurrency Exchange — Secure trading, high-performance MERN architecture
-                                across Android, iOS, and web.</p>
-                            <div class="tech-pills">
-                                <span>MERN</span><span>Blockchain</span><span>Web3</span>
-                            </div>
-                        </div>
-                        <div class="project-card" data-tilt>
-                            <div class="card-accent"></div>
+                            <p class="card-sub">Global Cryptocurrency Exchange</p>
+                            <p>Secure trading on a high-performance MERN architecture across Android, iOS and web.</p>
+                            <div class="pills"><span>MERN</span><span>Blockchain</span><span>Web3</span></div>
+                        </article>
+                        <article class="card">
                             <h5>Casino Gaming Platform</h5>
-                            <p>Real-time bidding system for Poker Club, Tower, and Roulette with secure transaction
-                                processing.</p>
-                            <div class="tech-pills">
-                                <span>React</span><span>Express</span><span>WebSocket</span>
-                            </div>
-                        </div>
+                            <p class="card-sub">Real-time Bidding</p>
+                            <p>Real-time bidding for Poker Club, Tower and Roulette with secure transaction processing.</p>
+                            <div class="pills"><span>React</span><span>Express</span><span>WebSocket</span></div>
+                        </article>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
+        <!-- ═══════════════ SKILLS ═══════════════ -->
+        <section id="skills" class="block">
+            <div class="container">
+                <div class="block-head">
+                    <span class="label">(03) Stack</span>
+                    <h2 class="heading">Technical <span class="dim">mastery.</span></h2>
+                </div>
 
-    <!-- ═══════════════ EDUCATION (03) ═══════════════ -->
-    <section id="education">
-        <div class="container">
-            <span class="section-label">03 — Education</span>
-            <h2 class="section-heading">Academic<br><em>Foundations</em></h2>
-            <div class="edu-grid">
-                <div class="edu-card">
-                    <div class="edu-dot"></div>
-                    <div class="edu-header">
+                <div class="skills-grid">
+                    <div class="skill-col">
+                        <h4>Frontend</h4>
+                        <ul><li>React</li><li>Next.js</li><li>TypeScript</li><li>Redux</li><li>TailwindCSS</li></ul>
+                    </div>
+                    <div class="skill-col">
+                        <h4>Backend</h4>
+                        <ul><li>Node.js</li><li>Express JS</li><li>Python</li><li>REST APIs</li><li>WebSocket</li></ul>
+                    </div>
+                    <div class="skill-col">
+                        <h4>Data</h4>
+                        <ul><li>MongoDB</li><li>PostgreSQL</li><li>Redis</li><li>Firebase</li></ul>
+                    </div>
+                    <div class="skill-col">
+                        <h4>Cloud &amp; Tools</h4>
+                        <ul><li>AWS</li><li>Azure</li><li>Docker</li><li>Vercel</li><li>Git / GitHub</li><li>Figma</li></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════ PROJECTS ═══════════════ -->
+        <section id="portfolio" class="block">
+            <div class="container">
+                <div class="block-head">
+                    <span class="label">(04) Projects</span>
+                    <h2 class="heading">Selected <span class="dim">work.</span></h2>
+                </div>
+
+                <div class="work-list">
+                    <a href="https://www.atna.ai/" target="_blank" rel="noopener" class="work-row">
+                        <span class="work-num">(01)</span><h3>ATNA.AI</h3><span class="work-cat">FinTech Platform</span><span class="work-arrow">↗</span>
+                    </a>
+                    <a href="https://www.solvstrat.com/" target="_blank" rel="noopener" class="work-row">
+                        <span class="work-num">(02)</span><h3>Solvstrat</h3><span class="work-cat">Custom Software Studio</span><span class="work-arrow">↗</span>
+                    </a>
+                    <a href="https://zncrypttechnologies.com/" target="_blank" rel="noopener" class="work-row">
+                        <span class="work-num">(03)</span><h3>ZNCrypt Technologies</h3><span class="work-cat">Web Engineering Consultancy</span><span class="work-arrow">↗</span>
+                    </a>
+                    <a href="https://usaseniorscricket.com/" target="_blank" rel="noopener" class="work-row">
+                        <span class="work-num">(04)</span><h3>USA Seniors Cricket</h3><span class="work-cat">Sports League</span><span class="work-arrow">↗</span>
+                    </a>
+                    <a href="http://jaasbro.in/" target="_blank" rel="noopener" class="work-row">
+                        <span class="work-num">(05)</span><h3>Jaas Bro</h3><span class="work-cat">Education &amp; Careers</span><span class="work-arrow">↗</span>
+                    </a>
+                    <a href="https://grbdairyfood.com" target="_blank" rel="noopener" class="work-row">
+                        <span class="work-num">(06)</span><h3>GRB Dairy Food</h3><span class="work-cat">Business Website</span><span class="work-arrow">↗</span>
+                    </a>
+                    <a href="https://skinstoryaesthetics.com" target="_blank" rel="noopener" class="work-row">
+                        <span class="work-num">(07)</span><h3>Skin Story Aesthetics</h3><span class="work-cat">Aesthetics Platform</span><span class="work-arrow">↗</span>
+                    </a>
+                    <a href="https://symphonybalispa.com" target="_blank" rel="noopener" class="work-row">
+                        <span class="work-num">(08)</span><h3>Symphony Bali Spa</h3><span class="work-cat">Spa &amp; Wellness</span><span class="work-arrow">↗</span>
+                    </a>
+                    <a href="https://intermontlife.com" target="_blank" rel="noopener" class="work-row">
+                        <span class="work-num">(09)</span><h3>Intermont Life</h3><span class="work-cat">Lifestyle Brand</span><span class="work-arrow">↗</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════ EDUCATION ═══════════════ -->
+        <section id="education" class="block">
+            <div class="container">
+                <div class="block-head">
+                    <span class="label">(05) Education</span>
+                    <h2 class="heading">Academic <span class="dim">foundations.</span></h2>
+                </div>
+                <div class="edu-grid">
+                    <div class="edu">
+                        <span class="edu-loc">Virudhunagar, India</span>
                         <h4>Sethu Institute of Technology</h4>
-                        <span class="edu-location">Virudhunagar, India</span>
+                        <p>Bachelor of Engineering (B.E) — Mechanical Engineering</p>
                     </div>
-                    <p class="edu-degree">Bachelor of Engineering (B.E)</p>
-                    <p class="edu-major">Mechanical Engineering</p>
-                </div>
-
-                <div class="edu-card">
-                    <div class="edu-dot"></div>
-                    <div class="edu-header">
+                    <div class="edu">
+                        <span class="edu-loc">Madurai, India</span>
                         <h4>Nagasiva Polytechnic College</h4>
-                        <span class="edu-location">Madurai, India</span>
-                    </div>
-                    <p class="edu-degree">Diploma in Engineering</p>
-                    <p class="edu-major">Mechanical Engineering</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════ SKILLS (04) ═══════════════ -->
-    <section id="skills">
-        <div class="container">
-            <span class="section-label">04 — Mastery</span>
-            <h2 class="section-heading">Technical<br><em>Mastery</em></h2>
-        </div>
-
-        <div class="ribbon-marquee-area">
-            <!-- Strip 1: Magenta, centered -->
-            <div class="ribbon-strip accent">
-                <div class="ribbon-track">
-                    <div class="ribbon-content">
-                        <span>React</span><span class="sep">×</span>
-                        <span>Next.js</span><span class="sep">×</span>
-                        <span>TypeScript</span><span class="sep">×</span>
-                        <span>Node.js</span><span class="sep">×</span>
-                        <span>Redux</span><span class="sep">×</span>
-                        <span>Express JS</span><span class="sep">×</span>
-                        <span>Python Basics</span><span class="sep">×</span>
-                        <span>TailwindCSS</span><span class="sep">×</span>
-                    </div>
-                    <div class="ribbon-content" aria-hidden="true">
-                        <span>React</span><span class="sep">×</span>
-                        <span>Next.js</span><span class="sep">×</span>
-                        <span>TypeScript</span><span class="sep">×</span>
-                        <span>Node.js</span><span class="sep">×</span>
-                        <span>Redux</span><span class="sep">×</span>
-                        <span>Express JS</span><span class="sep">×</span>
-                        <span>Python Basics</span><span class="sep">×</span>
-                        <span>TailwindCSS</span><span class="sep">×</span>
+                        <p>Diploma in Engineering — Mechanical Engineering</p>
                     </div>
                 </div>
             </div>
+        </section>
+    </main>
 
-            <!-- Strip 2: Dark, centered -->
-            <div class="ribbon-strip dark">
-                <div class="ribbon-track reverse">
-                    <div class="ribbon-content">
-                        <span>MongoDB</span><span class="sep">×</span>
-                        <span>PostgreSQL</span><span class="sep">×</span>
-                        <span>Redis</span><span class="sep">×</span>
-                        <span>AWS</span><span class="sep">×</span>
-                        <span>Git / GitHub</span><span class="sep">×</span>
-                        <span>Firebase</span><span class="sep">×</span>
-                        <span>Hostinger</span><span class="sep">×</span>
-                        <span>Figma</span><span class="sep">×</span>
-                        <span>Vercel</span><span class="sep">×</span>
-                        <span>GoDaddy</span><span class="sep">×</span>
-                    </div>
-                    <div class="ribbon-content" aria-hidden="true">
-                        <span>MongoDB</span><span class="sep">×</span>
-                        <span>PostgreSQL</span><span class="sep">×</span>
-                        <span>Redis</span><span class="sep">×</span>
-                        <span>AWS</span><span class="sep">×</span>
-                        <span>Git / GitHub</span><span class="sep">×</span>
-                        <span>Firebase</span><span class="sep">×</span>
-                        <span>Hostinger</span><span class="sep">×</span>
-                        <span>Figma</span><span class="sep">×</span>
-                        <span>Vercel</span><span class="sep">×</span>
-                        <span>GoDaddy</span><span class="sep">×</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════ PORTFOLIO (05) ═══════════════ -->
-    <section id="portfolio">
-        <div class="container">
-            <span class="section-label">05 — Projects</span>
-            <h2 class="section-heading">Digital<br><em>Products</em></h2>
-            <div class="portfolio-list">
-                <a href="https://grbdairyfood.com" target="_blank" class="portfolio-item">
-                    <span class="portfolio-name">grbdairyfood.com</span>
-                    <span class="portfolio-type">Business Website</span>
-                    <span class="portfolio-arrow">↗</span>
-                </a>
-                <a href="https://skinstoryaesthetics.com" target="_blank" class="portfolio-item">
-                    <span class="portfolio-name">skinstoryaesthetics.com</span>
-                    <span class="portfolio-type">Aesthetics Platform</span>
-                    <span class="portfolio-arrow">↗</span>
-                </a>
-                <a href="https://symphonybalispa.com" target="_blank" class="portfolio-item">
-                    <span class="portfolio-name">symphonybalispa.com</span>
-                    <span class="portfolio-type">Spa & Wellness</span>
-                    <span class="portfolio-arrow">↗</span>
-                </a>
-                <a href="https://intermontlife.com" target="_blank" class="portfolio-item">
-                    <span class="portfolio-name">intermontlife.com</span>
-                    <span class="portfolio-type">Lifestyle Brand</span>
-                    <span class="portfolio-arrow">↗</span>
-                </a>
-                <a href="https://solvstrat.com" target="_blank" class="portfolio-item">
-                    <span class="portfolio-name">solvstrat.com</span>
-                    <span class="portfolio-type">Business Platform</span>
-                    <span class="portfolio-arrow">↗</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════ CONTACT (06) ═══════════════ -->
+    <!-- ═══════════════ CONTACT ═══════════════ -->
     <section id="contact">
-        <div class="container contact-inner">
-            <span class="section-label">06 — Connect</span>
-            <h2 class="contact-heading">Let's Build<br>Something <em>Great</em></h2>
+        <div class="contact-frame">
+            <span class="corner tl"></span><span class="corner tr"></span>
+            <span class="corner bl"></span><span class="corner br"></span>
+            <span class="label">(06) Contact</span>
+            <h2 class="contact-heading">Let's build<br>something <span class="hl">great.</span></h2>
+            <span class="script" aria-hidden="true">Let's talk</span>
             <div class="contact-actions">
-                <a href="mailto:mohammedyazir412@gmail.com" class="btn btn-primary btn-lg">
-                    <svg class="btn-icon icon-mail" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                    </svg>
-                    Send a Message
-                </a>
-                <a href="https://linkedin.com/in/mohammed-yazir-110b972a2" target="_blank"
-                    class="btn btn-outline btn-lg">
-                    <svg class="btn-icon icon-linkedin" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                    </svg>
-                    LinkedIn
-                </a>
+                <a href="mailto:mohammedyazir412@gmail.com" class="btn btn-primary">Send a message</a>
+                <a href="https://linkedin.com/in/mohammed-yazir-110b972a2" target="_blank" rel="noopener"
+                    class="btn btn-ghost">LinkedIn ↗</a>
             </div>
             <div class="contact-meta">
+                <a href="mailto:mohammedyazir412@gmail.com">mohammedyazir412@gmail.com</a>
+                <a href="tel:+919003484852">+91 9003484852</a>
                 <span>Madurai, Tamil Nadu</span>
-                <a href="tel:+919003484852" class="contact-link">+91 9003484852</a>
-                <a href="mailto:mohammedyazir412@gmail.com" class="contact-link">mohammedyazir412@gmail.com</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-inner">
-            <a href="#hero" class="footer-logo">MOHAMMED YAZIR<span> . S</span></a>
+        <div class="footer-top">
+            <a href="#hero" class="logo big"><span class="hl">mo</span>yazir</a>
             <div class="footer-links">
                 <a href="#about">About</a>
                 <a href="#experience">Work</a>
@@ -357,16 +320,24 @@
                 <a href="#portfolio">Projects</a>
                 <a href="#contact">Contact</a>
             </div>
-            <p class="footer-copy">© 2026 Mohammed Yazir S. All Rights Reserved</p>
+        </div>
+        <div class="footer-bottom">
+            <span>2024–26© Mohammed Yazir S</span>
+            <span>Local time <b id="local-time">--:--</b> IST</span>
+            <span>Made in Madurai</span>
         </div>
     </footer>
 
-    <!-- Scripts (order matters) -->
-    <script src="https://unpkg.com/three@0.150.0/build/three.min.js"></script>
+    <!-- Current role badge -->
+    <div class="status-badge">
+        <span>Currently</span>
+        <span class="bars"><i></i><i></i><i></i><i></i><i></i></span>
+        <b>Full Stack Dev @ Crayon BIZ-LLP</b>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="scene.js"></script>
-    <script src="skills-3d.js"></script>
     <script src="app.js"></script>
 </body>
 

@@ -6,280 +6,125 @@
 (function () {
     'use strict';
 
-    if (typeof gsap === 'undefined') return;
-    gsap.registerPlugin(ScrollTrigger);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ─── Hero Reveal Timeline ───
-    const heroTL = gsap.timeline({ delay: 0.3 });
-
-    // Initial State for characters
-    gsap.set('.interactive-name .char, .interactive-name .char-wrap', { 
-        opacity: 0, 
-        y: 100,
-        rotationX: -90
-    });
-
-    heroTL
-        .to('.hero-eyebrow', {
-            opacity: 1, y: 0,
-            duration: 1, ease: 'power3.out'
-        })
-        .to('.interactive-name .char, .interactive-name .char-wrap', {
-            opacity: 1, 
-            y: 0,
-            rotationX: 0,
-            duration: 1,
-            stagger: 0.05,
-            ease: 'back.out(1.7)', // The "Jumping" effect
-        }, '-=0.7')
-        .to('.hero-tagline', {
-            opacity: 1, y: 0,
-            duration: 1, ease: 'power3.out'
-        }, '-=0.6')
-        .to('.hero-cta-row', {
-            opacity: 1, y: 0,
-            duration: 1, ease: 'power3.out'
-        }, '-=0.7');
-
-    // ─── Interactive Name Hover Reaction ───
-    document.querySelectorAll('.interactive-name .char, .interactive-name .char-wrap').forEach(char => {
-        char.addEventListener('mouseenter', () => {
-            gsap.to(char, {
-                y: -15, // Jump on hover
-                scale: 1.1,
-                color: 'var(--accent)',
-                duration: 0.3,
-                ease: 'power2.out'
-            });
+    // ─── Local time (IST) ───
+    const timeEl = document.getElementById('local-time');
+    const tick = () => {
+        if (!timeEl) return;
+        timeEl.textContent = new Date().toLocaleTimeString('en-GB', {
+            timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit'
         });
-        char.addEventListener('mouseleave', () => {
-            gsap.to(char, {
-                y: 0,
-                scale: 1,
-                color: '', // Reset
-                duration: 0.5,
-                ease: 'elastic.out(1, 0.3)' // Bounce back
-            });
-        });
-    });
+    };
+    tick();
+    setInterval(tick, 15000);
 
-
-    // ─── Section Reveals (Excluding Skills which has its own 3D loop) ───
-    const revealSections = document.querySelectorAll('section:not(#hero):not(#skills)');
-
-    revealSections.forEach(section => {
-        const elements = section.querySelectorAll('.section-label, .section-heading, .section-sub, .skills-3d-wrapper, .lead-text, .about-text p, .mission-quote, .focus-card, .exp-block, .skill-category, .portfolio-item, .contact-heading, .contact-actions, .contact-meta');
-
-        if (elements.length) {
-            gsap.set(elements, { opacity: 0, y: 30 }); // Pre-set to invisible
-
-            ScrollTrigger.create({
-                trigger: section,
-                start: 'top 85%',
-                onEnter: () => {
-                    gsap.to(elements, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 1,
-                        stagger: 0.1,
-                        ease: 'power3.out',
-                        overwrite: true
-                    });
-                }
-            });
-        }
-    });
-
-    // Refresh ScrollTrigger to catch correct offsets
-    window.addEventListener('load', () => ScrollTrigger.refresh());
-
-    // ─── Project Card 3D Tilt ───
-    document.querySelectorAll('.project-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-            gsap.to(card, {
-                rotationX: -y * 8,
-                rotationY: x * 8,
-                duration: 0.4,
-                ease: 'power2.out',
-                transformPerspective: 600
-            });
-        });
-
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-                rotationX: 0, rotationY: 0,
-                duration: 0.6, ease: 'power3.out'
-            });
-        });
-    });
-
-    // ─── Focus Card stagger on hover ───
-    document.querySelectorAll('.focus-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            gsap.to(card, {
-                scale: 1.03, duration: 0.3, ease: 'power2.out'
-            });
-        });
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-                scale: 1, duration: 0.3, ease: 'power2.out'
-            });
-        });
-    });
-
-    // ─── Skill Category 3D Tilt ───
-    document.querySelectorAll('.skill-category').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-            gsap.to(card, {
-                rotationX: -y * 6,
-                rotationY: x * 6,
-                duration: 0.4,
-                ease: 'power2.out',
-                transformPerspective: 800
-            });
-        });
-
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-                rotationX: 0, rotationY: 0,
-                duration: 0.6, ease: 'power3.out'
-            });
-        });
-    });
+    // ─── Nav background once scrolled ───
+    const nav = document.getElementById('main-nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     // ─── Smooth anchor scrolling ───
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
             const target = document.querySelector(link.getAttribute('href'));
-            if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
+            if (!target) return;
+            e.preventDefault();
+            window.scrollTo({ top: target.offsetTop - 70, behavior: reduceMotion ? 'auto' : 'smooth' });
         });
     });
 
-    // ─── Hide scroll indicator on scroll ───
-    ScrollTrigger.create({
-        trigger: '#hero',
-        start: 'top top',
-        end: 'bottom 70%',
-        onLeave: () => gsap.to('.scroll-indicator', { opacity: 0, duration: 0.5 }),
-        onEnterBack: () => gsap.to('.scroll-indicator', { opacity: 0.6, duration: 0.5 })
+    if (typeof gsap === 'undefined' || reduceMotion) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ─── Hero Reveal Timeline ───
+    gsap.timeline({ delay: 0.2, defaults: { ease: 'power3.out' } })
+        .from('.hero-frame', { opacity: 0, scale: 0.94, duration: 1.2, ease: 'expo.out' })
+        .from('.hero-frame .corner', { scale: 0, duration: 0.5, stagger: 0.06 }, '-=0.9')
+        .from('.eyebrow', { opacity: 0, y: 12, duration: 0.7 }, '-=0.6')
+        .from('.wordmark', { opacity: 0, y: 40, filter: 'blur(12px)', duration: 1.1 }, '-=0.6')
+        .from('.hero-meta > *', { opacity: 0, y: 16, duration: 0.8, stagger: 0.1 }, '-=0.7')
+        .fromTo('#hero .script',
+            { clipPath: 'inset(0 100% 0 0)' },
+            { clipPath: 'inset(0 0% 0 0)', duration: 1.4, ease: 'power2.inOut' }, '-=0.5')
+        .from('.hero-services li', { opacity: 0, y: 10, duration: 0.6, stagger: 0.08 }, '-=1.1')
+        .from('#main-nav, .status-badge', { opacity: 0, y: -10, duration: 0.8 }, '-=1');
+
+    // ─── Atmosphere follows the pointer a little ───
+    const glows = gsap.utils.toArray('.atmos-glow');
+    window.addEventListener('pointermove', (e) => {
+        const x = e.clientX / window.innerWidth - 0.5;
+        const y = e.clientY / window.innerHeight - 0.5;
+        glows.forEach((g, i) => {
+            const depth = (i + 1) * 30;
+            gsap.to(g, { x: x * depth, y: y * depth, duration: 1.6, ease: 'power2.out' });
+        });
     });
 
+    // ─── Hero frame lifts away as you scroll ───
+    // fromTo with explicit start values: a plain .to() would record the intro's
+    // opacity:0 as its start and leave the hero blank when scrolling back up.
+    gsap.fromTo('.hero-frame', { yPercent: 0, opacity: 1 }, {
+        yPercent: -12,
+        opacity: 0.3,
+        ease: 'none',
+        immediateRender: false,
+        scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+    });
 
-    // ─── 3D Skills Carousel Scroll Rotation (Cinematic Snap) ───
-    const carousel = document.querySelector('.skills-carousel');
-    const skillsSection = document.querySelector('#skills');
-    
-    if (carousel && skillsSection) {
-        // Initial setup
-        gsap.set(carousel.querySelectorAll('.skill-category'), { opacity: 0.2, scale: 0.8 });
-        gsap.set(carousel.querySelector('.skill-category:first-child'), { opacity: 1, scale: 1 });
-
-        // Scramble effect function
-        const scrambleText = (el) => {
-            const originalText = el.innerText;
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
-            let iteration = 0;
-            
-            const interval = setInterval(() => {
-                el.innerText = originalText.split('').map((char, index) => {
-                    if(index < iteration) return originalText[index];
-                    return chars[Math.floor(Math.random() * chars.length)];
-                }).join('');
-                
-                if(iteration >= originalText.length) clearInterval(interval);
-                iteration += 1/3;
-            }, 30);
-        };
-
-        // Rotation: Vertical Ferris Wheel with Jumping Ball Sync
-        ScrollTrigger.create({
-            trigger: '#skills',
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1.5,
-            pin: '.skills-sticky',
-            onEnter: () => {
-                document.querySelector('.skills-sticky').classList.add('is-active');
-            },
-            onUpdate: (self) => {
-                const panels = carousel.querySelectorAll('.skill-category');
-                const progress = self.progress;
-
-                // Dispatch event to 3D scene
-                window.dispatchEvent(new CustomEvent('skillsScroll', { detail: { progress } }));
-                
-                // Ferris Wheel Rotation (Parent)
-                const wheelAngle = progress * 360;
-                gsap.set(carousel, { 
-                    rotationX: wheelAngle,
-                    rotationY: progress * 20 // Slight tilt for depth
-                });
-
-                // Parallax for the grid - moves vertically
-                gsap.set('.skills-bg-grid', { 
-                    backgroundPosition: `center ${-progress * 600}px`,
-                    opacity: 0.1 + (progress * 0.3)
-                });
-
-                panels.forEach((p, i) => {
-                    const panelBaseAngle = i * 90;
-                    const currentAngle = panelBaseAngle + wheelAngle;
-                    
-                    // Counter-rotate each panel so it stays upright
-                    gsap.set(p, { 
-                        rotationX: -currentAngle,
-                        rotationY: -progress * 20 
-                    });
-
-                    // Distance from "Front"
-                    const modAngle = Math.abs((currentAngle + 180) % 360 - 180);
-                    const focus = Math.max(0.1, 1 - (modAngle / 60));
-                    
-                    // Active state detection
-                    const isFocusZone = focus > 0.85;
-                    const isNewlyFocused = isFocusZone && p.getAttribute('data-focused') !== 'true';
-                    
-                    if (isNewlyFocused) {
-                        p.setAttribute('data-focused', 'true');
-                        p.style.pointerEvents = 'all'; 
-                        
-                        // Impact Effect (Sync with ball landing)
-                        gsap.fromTo(p, 
-                            { boxShadow: '0 0 0px var(--accent)', borderColor: 'var(--accent)' },
-                            { boxShadow: '0 0 40px var(--accent-glow)', borderColor: 'var(--accent-light)', duration: 0.5 }
-                        );
-                        
-                        p.querySelectorAll('.skill-tag').forEach(tag => scrambleText(tag));
-                    } else if (focus < 0.6) {
-                        p.setAttribute('data-focused', 'false');
-                        p.style.pointerEvents = 'none';
-                    }
-
-                    gsap.to(p, { 
-                        opacity: focus, 
-                        scale: 0.7 + (focus * 0.3),
-                        filter: `blur(${Math.min(10, modAngle / 15)}px)`,
-                        duration: 0.2,
-                        overwrite: 'auto'
-                    });
-                });
-            }
+    // ─── Section Reveals ───
+    const revealTargets = '.block-head > *, .about-text > *, .focus-list li, .stat, .exp, .skill-col, .work-row, .edu';
+    gsap.utils.toArray(revealTargets).forEach(el => {
+        gsap.from(el, {
+            opacity: 0,
+            y: 40,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', once: true }
         });
-    }
+    });
 
-    console.log('✓ Mohammed Yazir S — Portfolio Loaded');
+    // ─── Contact frame + script ───
+    gsap.timeline({ scrollTrigger: { trigger: '#contact', start: 'top 65%', once: true } })
+        .from('.contact-frame', { opacity: 0, scale: 0.94, duration: 1.1, ease: 'expo.out' })
+        .from('.contact-frame > :not(.script):not(.corner)', { opacity: 0, y: 20, duration: 0.8, stagger: 0.08, ease: 'power3.out' }, '-=0.7')
+        .fromTo('#contact .script',
+            { clipPath: 'inset(0 100% 0 0)' },
+            { clipPath: 'inset(0 0% 0 0)', duration: 1.3, ease: 'power2.inOut' }, '-=0.6');
+
+    // ─── Stats count-up ───
+    document.querySelectorAll('.stat-num').forEach(el => {
+        const match = el.textContent.trim().match(/^(\d+(?:\.\d+)?)(.*)$/);
+        if (!match) return;
+        const end = parseFloat(match[1]);
+        const decimals = (match[1].split('.')[1] || '').length;
+        const suffix = match[2] || '';
+        const counter = { val: 0 };
+        el.textContent = (0).toFixed(decimals) + suffix;
+        gsap.to(counter, {
+            val: end,
+            duration: 1.6,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+            onUpdate: () => { el.textContent = counter.val.toFixed(decimals) + suffix; }
+        });
+    });
+
+    // ─── Magnetic Buttons ───
+    document.querySelectorAll('.btn, .nav-cta').forEach(btn => {
+        const strength = 0.3;
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = (e.clientX - rect.left - rect.width / 2) * strength;
+            const y = (e.clientY - rect.top - rect.height / 2) * strength;
+            gsap.to(btn, { x, y, duration: 0.4, ease: 'power2.out' });
+        });
+        btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+        });
+    });
+
+    // Refresh ScrollTrigger once fonts/layout settle
+    window.addEventListener('load', () => ScrollTrigger.refresh());
 })();

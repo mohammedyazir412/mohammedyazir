@@ -21,10 +21,10 @@
     // ─── Geometry: "Data Sphere" (Metal + Glow) ───
     const ballGeo = new THREE.IcosahedronGeometry(0.8, 4);
     const ballMat = new THREE.MeshStandardMaterial({
-        color: 0xF7D794,
+        color: 0x7C3AED,
         metalness: 0.9,
         roughness: 0.1,
-        emissive: 0xEDA6A3,
+        emissive: 0xEC4899,
         emissiveIntensity: 0.6
     });
     const ball = new THREE.Mesh(ballGeo, ballMat);
@@ -33,7 +33,7 @@
     // Glowing rim/aura
     const auraGeo = new THREE.IcosahedronGeometry(0.85, 4);
     const auraMat = new THREE.MeshBasicMaterial({
-        color: 0xF7D794,
+        color: 0xA855F7,
         transparent: true,
         opacity: 0.3,
         wireframe: true
@@ -42,7 +42,7 @@
     scene.add(aura);
 
     // Add lighting
-    const light = new THREE.PointLight(0xF7D794, 3, 15);
+    const light = new THREE.PointLight(0xA855F7, 3, 15);
     light.position.set(2, 2, 2);
     scene.add(light);
     scene.add(new THREE.AmbientLight(0xffffff, 0.5));

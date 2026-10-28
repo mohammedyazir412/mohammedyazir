@@ -32,8 +32,8 @@
     const colors = new Float32Array(particleCount * 3);
     const scales = new Float32Array(particleCount);
 
-    const accent_primary = new THREE.Color(0x111111);
-    const accent_secondary = new THREE.Color(0xF7D794);
+    const accent_primary = new THREE.Color(0x1a0040);
+    const accent_secondary = new THREE.Color(0x7C3AED);
 
     for (let i = 0, ix = 0; ix < countX; ix++) {
         for (let iy = 0; iy < countY; iy++) {
