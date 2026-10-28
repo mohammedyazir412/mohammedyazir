@@ -1,0 +1,53 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-hostinger
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # The action tracks what is already on the server, so a retry continues where it stopped.
+      - name: Deploy via FTP
+        id: ftp1
+        continue-on-error: true
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          timeout: 120000
+          local-dir: ./Mo_Yazir Portfolio/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || 'public_html/' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/*.md
+
+      - name: Deploy via FTP (retry)
+        if: steps.ftp1.outcome == 'failure'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          timeout: 120000
+          local-dir: ./Mo_Yazir Portfolio/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || 'public_html/' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/*.md
