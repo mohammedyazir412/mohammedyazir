@@ -28,11 +28,12 @@ jobs:
           protocol: ftps
           port: 21
           timeout: 120000
-          local-dir: ./Mo_Yazir Portfolio/
+          local-dir: ./
           server-dir: ${{ secrets.FTP_SERVER_DIR || 'public_html/' }}
           exclude: |
             **/.git*
             **/.git*/**
+            .github/**
             **/*.md
 
       - name: Deploy via FTP (retry)
@@ -45,9 +46,10 @@ jobs:
           protocol: ftps
           port: 21
           timeout: 120000
-          local-dir: ./Mo_Yazir Portfolio/
+          local-dir: ./
           server-dir: ${{ secrets.FTP_SERVER_DIR || 'public_html/' }}
           exclude: |
             **/.git*
             **/.git*/**
+            .github/**
             **/*.md
