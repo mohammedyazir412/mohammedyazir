@@ -29,8 +29,8 @@ jobs:
           port: 21
           timeout: 120000
           local-dir: ./
-          # The FTP account's home directory is already public_html
-          server-dir: ./
+          # The FTP account's home is domains/mohammedyazir.com; the site is served from public_html
+          server-dir: public_html/
           exclude: |
             **/.git*
             **/.git*/**
@@ -48,8 +48,8 @@ jobs:
           port: 21
           timeout: 120000
           local-dir: ./
-          # The FTP account's home directory is already public_html
-          server-dir: ./
+          # The FTP account's home is domains/mohammedyazir.com; the site is served from public_html
+          server-dir: public_html/
           exclude: |
             **/.git*
             **/.git*/**
