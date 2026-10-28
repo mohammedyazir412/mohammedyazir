@@ -29,7 +29,8 @@ jobs:
           port: 21
           timeout: 120000
           local-dir: ./
-          server-dir: ${{ secrets.FTP_SERVER_DIR || 'public_html/' }}
+          # The FTP account's home directory is already public_html
+          server-dir: ./
           exclude: |
             **/.git*
             **/.git*/**
@@ -47,7 +48,8 @@ jobs:
           port: 21
           timeout: 120000
           local-dir: ./
-          server-dir: ${{ secrets.FTP_SERVER_DIR || 'public_html/' }}
+          # The FTP account's home directory is already public_html
+          server-dir: ./
           exclude: |
             **/.git*
             **/.git*/**
